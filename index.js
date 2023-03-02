@@ -14,16 +14,8 @@ dotenv.config();
 const app = express();
 
 const PORT = process.env.PORT;
-//const MONGO_URL=process.env.MONGO_URL;
 
-// async function createConnection(){
-//     const client=new MongoClient(MONGO_URL);
-//     await client.connect();
-//     console.log("Mongo is connected😜");
-//     return client;
-// }
-
-// export const client = await createConnection();
+//connecting the mongoose//
 
 mongoose
    .connect(process.env.MONGO_URL,{useNewUrlParser:true})
@@ -37,7 +29,8 @@ app.get("/",(req,res)=>{
     res.send("This backend has been developed to create signin , signup , password reset pages. Please work with the UI for better understanding")
 });
 
-//implementing routes//
+//Setting routes//
+
 app.use("/login",loginRoute);
 app.use("/signup",signupRoute);
 app.use("/forgotPassword",forgotPasswordRoute);
