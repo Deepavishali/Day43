@@ -28,7 +28,7 @@ export const signup = async (req, res) => {
 
 export const forgotPassword = async (req, res) => {
     const { email } = req.body;
-    const secretCode = String(Math.random() * 1000).substr(0, 6);
+    const secretCode = String(Math.random()*100000).substring(0, 5);
     try {
         const userExist = await User.findOne({ email });
         if (!userExist) {
