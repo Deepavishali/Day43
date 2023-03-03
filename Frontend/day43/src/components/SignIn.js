@@ -69,12 +69,13 @@ export default function SignIn() {
       else{
         alert("Login successfull,click ok !")
         localStorage.setItem("authenticated",true);
+        navigate("/homepage")
         }
     })
       .then((data) => data.json())
       .then((data) => console.log(data)).catch((err) => console.log(err))
-      
-    console.log(newUser);
+     
+    
     setUser({ ...user, ...newUser });
   };
 
@@ -139,7 +140,7 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body2" onClick={()=>navigate("/forgotpassword")}>
                   Forgot password?
                 </Link>
               </Grid>
