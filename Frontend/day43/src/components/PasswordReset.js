@@ -49,8 +49,8 @@ export default function ForgotPassword() {
                 }
                 else {
                     alert("Password reset Successful")
-                    localStorage.setItem("authenticated", true);
-                    navigate("/passwordreset")
+                    localStorage.setItem("authenticated", true)
+                    navigate("/")
                 }
             })
             .then((data) => data.json())
