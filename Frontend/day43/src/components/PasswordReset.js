@@ -49,7 +49,7 @@ export default function ForgotPassword() {
                 }
                 else {
                     alert("Password reset Successful")
-                    localStorage.setItem("authenticated", true)
+                    localStorage.setItem("authenticated", true);
                     navigate("/")
                 }
             })
