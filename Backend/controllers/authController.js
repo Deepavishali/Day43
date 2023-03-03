@@ -6,11 +6,11 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
     const emailExist = await User.findOne({ email });
     if (!emailExist) {
-        res.send(`${email} is not registered`);
+        res.status(400).send(`${email} is not registered`);
     }
     else {
         const passwordCheck = await bcrypt.compare(password, emailExist.password);
-        passwordCheck ? res.send("User logged in successfully") : res.send("Incorrect password");
+        passwordCheck ? res.status(200).send("User logged in successfully") : res.status(400).send("Incorrect password");
     }
 };
 
@@ -21,9 +21,9 @@ export const signup = async (req, res) => {
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(password, salt);
         await User.create({ name, email, password: hashedPassword });
-        res.send("User signed up successfully");
+        res.status(200).send("User signed up successfully");
     }
-    else res.send(`${email} is already registered`);
+    else res.status(200).send(`${email} is already registered`);
 };
 
 export const forgotPassword = async (req, res) => {
@@ -32,7 +32,7 @@ export const forgotPassword = async (req, res) => {
     try {
         const userExist = await User.findOne({ email });
         if (!userExist) {
-            res.send(`${email} is not registered`);
+            res.status(400).send(`${email} is not registered`);
         } else {
             await User.findOneAndUpdate({ email }, { secretCode });
 
@@ -67,7 +67,7 @@ export const passwordReset = async (req, res) => {
     const hashedNewPassword = await bcrypt.hash(newPassword,salt);
     const userExist = await User.findOne({secretCode});
     if(!userExist){
-        res.send("User does not exist");
+        res.status(400).send("User does not exist");
     }
     else{
         await User.findOneAndUpdate(
