@@ -54,7 +54,7 @@ export default function SignUp() {
         })
             .then((res) => {
                 if (res.status === 400) {
-                    alert("Password must have atleast 8 characters [Atleast one capital letter,numbers and special cases mandatory]")
+                    alert("user already exist")
                 }
                 else {
                     alert("SignUp successfull,Click ok!")

@@ -23,7 +23,7 @@ export const signup = async (req, res) => {
         await User.create({ name, email, password: hashedPassword });
         res.status(200).send("User signed up successfully");
     }
-    else res.status(200).send(`${email} is already registered`);
+    else res.status(400).send(`${email} is already registered`);
 };
 
 export const forgotPassword = async (req, res) => {
