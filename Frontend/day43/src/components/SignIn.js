@@ -74,8 +74,8 @@ export default function SignIn() {
         }
       })
       //.then((data) => data.json())
-      .then((response) => {
-        localStorage.setItem("x-Auth-token", response.token);
+      .then((data) => {
+        localStorage.setItem("x-Auth-token", data.token);
         alert("Login successfull, Click ok!!");
         navigate("/homepage")
       })
