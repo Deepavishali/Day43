@@ -70,14 +70,14 @@ export default function SignIn() {
           //alert("Login successfull,click ok !")
           //localStorage.setItem("authenticated",true);
           //navigate("/homepage")
-          
+          return res.json();
         }
       })
-      .then((data) => data.json())
+      
       .then((response) => {
-        localStorage.setItem("x-Auth-token", response.token);
         alert("Login successfull, Click ok!!");
-        navigate("/homepage")
+        localStorage.setItem("x-Auth-token", response.token);
+         navigate("/homepage")
       })
     
       .catch((err) => console.log(err))
