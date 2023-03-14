@@ -62,20 +62,26 @@ export default function SignIn() {
       body: JSON.stringify(newUser),
       headers: { "Content-Type": "application/json" },
     })
-    .then((res)=>{
-      if(res.status===400){
-        alert("user not exist")
-      }
-      else{
-        alert("Login successfull,click ok !")
-        localStorage.setItem("authenticated",true);
-        navigate("/homepage")
+      .then((res) => {
+        if (res.status === 400) {
+          alert("user not exist")
         }
-    })
-      .then((data) => data.json())
-      .then((data) => console.log(data)).catch((err) => console.log(err))
-     
-    
+        else {
+          //alert("Login successfull,click ok !")
+          //localStorage.setItem("authenticated",true);
+          //navigate("/homepage")
+          
+        }
+      })
+      //.then((data) => data.json())
+      .then((response) => {
+        localStorage.setItem("x-Auth-token", response.token);
+        alert("Login successfull, Click ok!!");
+        navigate("/homepage")
+      })
+      .catch((err) => console.log(err))
+
+
     setUser({ ...user, ...newUser });
   };
 
@@ -134,18 +140,18 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              // onClick={()=>navigate('/client')}
+            // onClick={()=>navigate('/client')}
             >
               Sign In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2" onClick={()=>navigate("/forgotpassword")}>
+                <Link href="#" variant="body2" onClick={() => navigate("/forgotpassword")}>
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2" onClick={()=>navigate("/signup")}>
+                <Link href="#" variant="body2" onClick={() => navigate("/signup")}>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

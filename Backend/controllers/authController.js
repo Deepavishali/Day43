@@ -1,6 +1,7 @@
 import User from "../models/user.js";
 import bcrypt from "bcrypt";
 import nodemailer from "nodemailer";
+import jwt from "jsonwebtoken";
 
 export const login = async (req, res) => {
     const { email, password } = req.body;
@@ -10,8 +11,17 @@ export const login = async (req, res) => {
     }
     else {
         const passwordCheck = await bcrypt.compare(password, emailExist.password);
-        passwordCheck ? res.status(200).send("User logged in successfully") : res.status(400).send("Incorrect password");
-    }
+        if(passwordCheck){
+            const token = jwt.sign({foo:emailExist.email},process.env.MY_SECRET_KEY)
+            res.status(200).send({
+               message: "User logged in successfully",
+               token:token
+            })
+        }
+        else{
+            res.status(400).send("Incorrect password")
+        }
+       }
 };
 
 export const signup = async (req, res) => {
